@@ -1,0 +1,77 @@
+.mAuto {
+    margin:auto;
+}
+
+.m15 {
+    margin:30px;
+}
+
+.p15 {
+    padding:15px;
+}
+
+.w100 {
+    width:100%;
+}
+
+.flex {
+    display:flex;
+}
+
+.flexColumn {
+    flex-direction: column;
+}
+
+.justifyBetween {
+    justify-content: space-between;
+}
+
+.navbar {
+    width:100%;
+    padding-top:3rem;
+    background-color: var(--fauna-blue);
+    border-top: 2px solid var(--fauna-dark-blue);
+}
+
+.progressBar{
+    position: fixed;
+    width:100%;
+    min-height:1rem;
+    background-color: white;
+}
+
+.progressMeter {
+    margin:auto;
+    position:absolute;
+    height:100%;
+    background-color: var(--pastel-pink);
+    transition:width 0.65s ease;
+}
+
+.breadcrumbNode {
+    text-align: center;
+    vertical-align: middle;
+    position:absolute;
+    border:1px solid gray;
+    color:black;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    transform: translate(0rem, -25%);
+    background-color: white;
+    &:hover{
+        background-color:var(--platinum);
+    }
+    &.active {
+        border:1px solid gray;
+        background-color:var(--fauna-pink);
+        transition:background-color 0s ease 0.65s;
+    }
+
+}
+
+.breadcrumbLine {
+    height: 1rem;
+    background-color: gray;
+    width: 100%;
+}

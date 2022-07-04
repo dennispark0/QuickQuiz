@@ -1,0 +1,35 @@
+.optionGroup {
+    width: min(50%, 500px);
+}
+
+.optionContainer {
+    cursor: pointer;
+    border: 2px solid var(--fauna-navy-blue);
+    color: var(--fauna-navy-blue);
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 1.5rem;
+    /* padding:1rem; */
+    margin: 0.5rem;
+    &:active {
+        filter: brightness(80%);
+    }
+    &.selected {
+        background-color: var(--powder-blue);
+        .questionMarker {
+            border-color:transparent;
+            background-color: var(--fauna-navy-blue);
+            color: transparent;
+        }
+    }
+    &:hover{
+        background-color: var(--powder-blue);
+    }
+}
+
+.questionMarker {
+    color: transparent;
+    border-right: 2px solid var(--fauna-navy-blue);
+    padding: 0.5rem 1rem;
+}

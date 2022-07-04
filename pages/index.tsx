@@ -1,37 +1,42 @@
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import MultipleChoice from "../components/questions/multiple-choice/multiple-choice";
-
-import { useKanji } from "../services/http/kanji-api.service";
-
-import cssUtils from '../styles/utils.module.css';
+import Test from "../test/sample";
+import cssUtils from "../styles/utils.module.scss";
+import { TestFlowShell } from "../components/shells/test-flow-shell";
+import { useState } from "react";
 
 export default function HomePage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [submitQuery, setSubmitQuery] = useState("grade-1");
-  const kanjiData = useKanji(submitQuery);
-  const options = [
-    {
-      id: "1",
-      label: "右",
-    },
-    {
-      id: "2",
-      label: "雨",
-    },
-    {
-      id: "3",
-      label: "音",
-    },
-  ];
-  console.log(kanjiData);
+  const [index, setIndex] = useState(0);
+  const options = Test;
+  const numQuestions = options.questions.length;
+  const calculateMeter = () => ({ width: `${(100 / (numQuestions - 1)) * index}%` });
+  const createProgressBar = (numQuestions: number) => {
+    let rts = [];
+    for (let i = 0; i < numQuestions; i++) {
+      const style = i+1 < numQuestions ? { left: `calc(${(100 / (numQuestions - 1)) * i}% - ${i && '1rem'})` } : {right:0};
+      rts[i] = <button onClick={()=>{setIndex(i)}} key={`breadcrumb_${i}`} 
+      className={`d-flex ${cssUtils.breadcrumbNode} ${index === i ? cssUtils.active : ''}`} style={style}
+      ><span className="m-auto">{i+1}</span></button>;
+    }
+    return rts;
+  };
   return (
-    <div className={`${cssUtils.m15} ${cssUtils.p15} ${cssUtils.w100}`}>
-      {/* <h1>Data for {submitQuery} kanji</h1> */}
-      {/* <div>{kanjiData ? JSON.stringify(kanjiData) : 'No data found!'}</div>
-      <input value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)}/> */}
-      <MultipleChoice options={options}></MultipleChoice>
-      {/* <button onClick={()=>setSubmitQuery(searchQuery)}>Find</button> */}
+    <div className={`${cssUtils.w100}`}>
+      <nav className={cssUtils.navbar}>
+        <div className={cssUtils.progressBar}>
+          <div className={cssUtils.progressMeter} style={calculateMeter()}></div>
+            {createProgressBar(numQuestions)}
+        </div>
+      </nav>
+
+      <TestFlowShell kind={options.questions[index].kind} args={options.questions[index].args} />
+
+      <div className="buttons-container">
+        <button className="p-15" onClick={() => setIndex(Math.max(0, index - 1))}>
+          Prev
+        </button>
+        <button className="p-15" onClick={() => setIndex(Math.min(index + 1, options.questions.length - 1))}>
+          Next
+        </button>
+      </div>
     </div>
   );
 }

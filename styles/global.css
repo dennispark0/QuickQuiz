@@ -1,8 +1,0 @@
-body,html,#__next {
-    height:100%;
-    margin:auto;
-}
-
-#__next {
-    display: flex;
-}
